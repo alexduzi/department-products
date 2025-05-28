@@ -25,4 +25,8 @@ public class ProductService {
     public ProductDTO findById(UUID id) {
         return productRepository.findById(id).map(ProductDTO::new).orElseThrow(() -> new ResourceNotFoundException("Department not found!"));
     }
+
+    public List<ProductDTO> findByDepartment(String department) {
+        return productRepository.findByDepartment(department).stream().map(ProductDTO::new).toList();
+    }
 }
