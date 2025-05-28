@@ -33,7 +33,7 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public ResponseEntity<DepartmentDTO> findById(@RequestBody DepartmentDTO departmentDTO) {
+    public ResponseEntity<DepartmentDTO> insert(@RequestBody DepartmentDTO departmentDTO) {
         DepartmentDTO result = departmentService.insert(departmentDTO);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(result.getId()).toUri();
         return ResponseEntity.created(location).body(result);
