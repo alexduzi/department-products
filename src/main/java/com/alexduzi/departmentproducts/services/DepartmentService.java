@@ -1,6 +1,7 @@
 package com.alexduzi.departmentproducts.services;
 
 import com.alexduzi.departmentproducts.model.dto.DepartmentDTO;
+import com.alexduzi.departmentproducts.model.entities.Department;
 import com.alexduzi.departmentproducts.repositories.DepartmentRepository;
 import com.alexduzi.departmentproducts.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,13 @@ public class DepartmentService {
 
     public DepartmentDTO findById(UUID id) {
         return departmentRepository.findById(id).map(DepartmentDTO::new).orElseThrow(() -> new ResourceNotFoundException("Department not found!"));
+    }
+
+    public DepartmentDTO insert(DepartmentDTO departmentDTO) {
+        Department entity = new Department();
+        entity.setId(UUID.randomUUID());
+        entity.setName(departmentDTO.getName());
+        entity = departmentRepository.save(entity);
+        return new DepartmentDTO(entity);
     }
 }
