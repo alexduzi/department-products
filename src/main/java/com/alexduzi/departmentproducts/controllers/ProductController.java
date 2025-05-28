@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/department")
-    public ResponseEntity<List<ProductDTO>> findByDepartment(@RequestParam(value = "department", defaultValue = "") String department) {
+    public ResponseEntity<List<ProductDTO>> findByDepartment(@RequestParam(value = "department") String department) {
         List<ProductDTO> result = productService.findByDepartment(department);
         return ResponseEntity.ok(result);
     }

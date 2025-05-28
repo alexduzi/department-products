@@ -6,6 +6,7 @@ import com.alexduzi.departmentproducts.services.exceptions.ResourceNotFoundExcep
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,12 @@ public class ProductService {
     }
 
     public List<ProductDTO> findByDepartment(String department) {
-        return productRepository.findByDepartment(department).stream().map(ProductDTO::new).toList();
+        return Optional.ofNullable(department)
+                .filter(dept -> !dept.isBlank())
+                .map(productRepository::findByDepartment)
+                .orElse(productRepository.findAll())
+                .stream()
+                .map(ProductDTO::new)
+                .toList();
     }
 }
