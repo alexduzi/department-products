@@ -41,4 +41,11 @@ public class DepartmentService {
         entity = departmentRepository.save(entity);
         return new DepartmentDTO(entity);
     }
+
+    public void delete(UUID id) {
+        if (!departmentRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Department not found!");
+        }
+        departmentRepository.deleteById(id);
+    }
 }
