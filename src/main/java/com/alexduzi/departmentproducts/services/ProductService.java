@@ -36,4 +36,15 @@ public class ProductService {
                 .map(ProductDTO::new)
                 .toList();
     }
+
+    public List<ProductDTO> findByDescription(String text) {
+        return Optional.ofNullable(text)
+                .filter(t -> !t.isBlank())
+                .map(t -> "%" + t + "%")
+                .map(productRepository::findByDescription)
+                .orElse(productRepository.findAll())
+                .stream()
+                .map(ProductDTO::new)
+                .toList();
+    }
 }
