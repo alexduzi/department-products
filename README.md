@@ -50,6 +50,8 @@ SELECT * FROM post WHERE author = 'Maria' ALLOW FILTERING;
 
 CREATE CUSTOM INDEX body_idx ON post (body) USING 'org.apache.cassandra.index.sasi.SASIIndex' WITH OPTIONS = {'mode': 'CONTAINS', 'analyzer_class': 'org.apache.cassandra.index.sasi.analyzer.NonTokenizingAnalyzer','case_sensitive': 'false'};
 
+CREATE CUSTOM INDEX products_description_idx ON products (description) USING 'org.apache.cassandra.index.sasi.SASIIndex' WITH OPTIONS = {'mode': 'CONTAINS', 'analyzer_class': 'org.apache.cassandra.index.sasi.analyzer.NonTokenizingAnalyzer','case_sensitive': 'false'};
+
 SELECT * FROM post WHERE body LIKE '%MORNING%';
 ```
 
