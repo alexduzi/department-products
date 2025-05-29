@@ -63,7 +63,7 @@ public class Department {
 
         public Department build() {
             Objects.requireNonNull(name, "Department name cannot be null");
-            Objects.requireNonNull(id, "Department name cannot be null");
+            Objects.requireNonNull(id, "Department id cannot be null");
 
             if (name.trim().isBlank()) {
                 throw new IllegalArgumentException("Department name cannot be blank");
